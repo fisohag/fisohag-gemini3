@@ -1,20 +1,44 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Cloud, Database, Cpu } from 'lucide-react';
+import { ArrowRight, Cloud, Database } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (
     <section id="overview" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-      {/* Background Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-500/20 blur-[120px] rounded-full pointer-events-none opacity-50" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-900/10 blur-[100px] rounded-full pointer-events-none" />
+      {/* Background Gradients - Animated */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3], 
+          rotate: [0, 90, 0] 
+        }}
+        transition={{ 
+          duration: 20, 
+          repeat: Infinity, 
+          ease: "linear" 
+        }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-brand-500/20 blur-[120px] rounded-full pointer-events-none" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.1, 1],
+          x: [0, -50, 0],
+          opacity: [0.1, 0.3, 0.1]
+        }}
+        transition={{ 
+          duration: 15, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+        className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-900/10 blur-[100px] rounded-full pointer-events-none" 
+      />
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm"
+          className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-default"
         >
           <span className="flex h-2 w-2 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-500 opacity-75"></span>
@@ -30,7 +54,7 @@ const Hero: React.FC = () => {
           className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] tracking-tight mb-8"
         >
           Architecting the <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-blue-400 to-white">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-blue-400 to-white animate-text">
             Digital Future
           </span>
         </motion.h1>
@@ -70,17 +94,17 @@ const Hero: React.FC = () => {
         {/* Floating Icons / Stats - Decorative */}
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1.5 }}
-          className="absolute top-1/2 left-10 hidden lg:block opacity-20"
+          animate={{ opacity: 1, y: [0, -20, 0] }}
+          transition={{ delay: 1, duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/2 left-10 hidden lg:block opacity-20 text-brand-300"
         >
             <Cloud size={64} />
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1.5 }}
-          className="absolute bottom-20 right-10 hidden lg:block opacity-20"
+          animate={{ opacity: 1, y: [0, 20, 0] }}
+          transition={{ delay: 1.2, duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 right-10 hidden lg:block opacity-20 text-blue-300"
         >
             <Database size={64} />
         </motion.div>
@@ -93,7 +117,11 @@ const Hero: React.FC = () => {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
-        <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white/50 to-transparent"></div>
+        <motion.div 
+          animate={{ height: [0, 64, 0], y: [0, 0, 64], opacity: [0, 1, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[1px] bg-gradient-to-b from-transparent via-brand-500 to-transparent"
+        ></motion.div>
       </motion.div>
     </section>
   );
